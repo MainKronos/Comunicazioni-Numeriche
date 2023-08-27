@@ -532,3 +532,51 @@ la banda impiegata sará: $$B_T \simeq \frac{1}{T}$$
 
 ### PAM
 
+Il *Phase Amplitude Modulation* (PAM) è un sistema di comunicazione in banda base.\
+Il segnale PAM è generato dalla serie di simboli $\\{a_i\\}$ modulati in ampiezza dal segnale $g_T(t)$:
+
+$$S_T(t) = \sum\limits_i a_ig_T(t-iT)$$
+
+![PAM](img/pam.png)
+
+- $\\{a_i\\}$: sequenza dei simboli di modulazione
+
+- $g_T(t)$: impulso di trasmissione
+
+- $c(t)$: risposta impulsiva del canale
+
+- $w(t)$: rumore gaussiano bianco con densità spettrale di potenza $N_0/2$
+
+- $g_R(t)$: filtro di ricezione
+
+- $\^a_k$: stima del simbolo $a_k$
+
+La componente $x(k)$ ricevuta dal ricevitore è:
+
+$$x(k) = \sum\limits_i a_ig[(k-i)T]+n_k$$
+
+indicando con $m=k-i$ e isolando il termine relativo a $m=0$
+
+$$x(k)=a_kg(0)+\sum\limits_{m\ne0} a_{k-m}g(mt)+n_k$$
+
+il secondo termine è l'interferenza intersimbolica (ISI)
+
+$$\text{ISI}=\sum\limits_{m\ne0}a_{k-m}\;g(mT)$$
+
+#### Caso generale
+
+- Densità spettrale di potenza
+: $S_s(f) = \frac{1}{T}S_a(f)|G_T(f)|^2$
+: dove
+: $S_a(f)=\sum\limits_m R_a(m)e^{-j2\pi mft}$
+
+- Potenza del segnale
+: $P_s = \frac{1}{T}\int\limits_{-\infty}^{\infty}S_a(f)|G_T(f)|^2df$
+
+#### Simboli Indipendenti e Identicamente Distribuiti (IID)
+
+- Densità spettrale di potenza
+: $S_s(f) = \frac{M^2-1}{3T}|G_T(f)|^2$
+
+- Potenza del segnale
+: $P_s = \frac{M^2-1}{3T}\int\limits_{-\infty}^{\infty}|G_T(f)|^2df$
