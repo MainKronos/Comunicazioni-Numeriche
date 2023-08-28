@@ -1,5 +1,6 @@
 site_name: My Docs
 site_description: Appunti Comunicazioni Numeriche
+site_url: https://github.com/MainKronos/Comunicazioni-Numeriche
 
 theme:
   name: 'material'
@@ -18,6 +19,9 @@ theme:
         name: 'Switch to light mode'
   icon:
     repo: fontawesome/brands/github
+
+repo_name: MainKronos/Comunicazioni-Numeriche
+repo_url: https://github.com/MainKronos/Comunicazioni-Numeriche
 
 nav:
   - Home: 'index.md'
