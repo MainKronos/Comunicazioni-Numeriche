@@ -532,7 +532,7 @@ la banda impiegata sará: $$B_T \simeq \frac{1}{T}$$
 
 ### PAM
 
-Il *Phase Amplitude Modulation* (PAM) è un sistema di comunicazione in banda base.\
+Il *Phase Amplitude Modulation* (PAM) è un sistema di comunicazione in banda base.La cardinalità $M$ è una potenza di $2$.\
 Il segnale PAM è generato dalla serie di simboli $\\{a_i\\}$ modulati in ampiezza dal segnale $g_T(t)$:
 
 $$S_T(t) = \sum\limits_i a_ig_T(t-iT)$$
@@ -549,7 +549,7 @@ $$S_T(t) = \sum\limits_i a_ig_T(t-iT)$$
 
 - $g_R(t)$: filtro di ricezione
 
-- $\^a_k$: stima del simbolo $a_k$
+- $\\^a_k$: stima del simbolo $a_k$
 
 La componente $x(k)$ ricevuta dal ricevitore è:
 
@@ -563,7 +563,9 @@ il secondo termine è l'interferenza intersimbolica (ISI)
 
 $$\text{ISI}=\sum\limits_{m\ne0}a_{k-m}\;g(mT)$$
 
-#### Caso generale
+#### Grandezze energetiche
+
+##### Caso generale
 
 - Densità spettrale di potenza
 : $S_s(f) = \frac{1}{T}S_a(f)|G_T(f)|^2$
@@ -573,10 +575,105 @@ $$\text{ISI}=\sum\limits_{m\ne0}a_{k-m}\;g(mT)$$
 - Potenza del segnale
 : $P_s = \frac{1}{T}\int\limits_{-\infty}^{\infty}S_a(f)|G_T(f)|^2df$
 
-#### Simboli Indipendenti e Identicamente Distribuiti (IID)
+##### Simboli Indipendenti e Identicamente Distribuiti (IID)
 
 - Densità spettrale di potenza
 : $S_s(f) = \frac{M^2-1}{3T}|G_T(f)|^2$
 
 - Potenza del segnale
 : $P_s = \frac{M^2-1}{3T}\int\limits_{-\infty}^{\infty}|G_T(f)|^2df$
+
+#### Annullamento dell'ISI
+
+$$\text{ISI}=\sum\limits_{m\ne0}a_{k-m}\;g(mT)$$
+
+Come si vede dall'equazione, per annullare l'ISI è necessario imporre le seguenti "condizioni di Nyquist" nel dominio del tempo:
+
+$$g(mT) = \begin{cases}
+  1 &\quad \text{per } m=0 \newline
+  0 &\quad \text{per } m\ne 0
+\end{cases}$$
+
+Se tali condizioni valgono, allora l'espressione del campione $x(k)$ in uscita dal filtro adattato diventa
+
+$$x(k)=a_k+n_k$$
+
+Un impulso che soddisfa le condizioni di Nyquist si dice **Impulso di Nyquist**.
+
+Le condizioni di Nyquist nel dominio della frequenza :
+
+$$\sum\limits_{l=-\infin}^{\infin}G\left(f-\frac{l}{T}\right)=T$$
+
+!!! tip "indicano chiaramente:"
+    Condizione **NECESSARIA** (ma non sufficiente) affinchè un impulso $g(t)$ sia di Nyquist è che la sua trasformata di Fourier $G(f)$ abbia banda almeno pari a $1/2T$
+
+#### Filtro adattato
+
+Il rapporto segnale rumore:
+
+$$SNR = \cfrac{\left[\int\limits_{-\infin}^\infin h(t)p(t_0-t)dt\right]^2}{\frac{N_0}{2}\int\limits_{-\infin}^\infin h^2(t)dt}$$
+
+Il progetto dei filtri $g_T(t)$ e $g_R(t)$ passa attraverso le seguenti condizioni:
+
+a) Annullamento dell'ISI
+: $G(f) = G_T(f)G_R(f)=G_{RCR}(f)$
+
+b) Massimizzazione del rapporto segnale rumore sul campione in uscita dal filtro di ricezione
+: $g_R(t)=g_T(-t) \to G_R(f)=G^{*}_T(f)$
+
+il filtro quindi deve essere:
+
+$$G_T(f) = G_R(f)=\sqrt{G_{RCR}(f)}$$
+
+#### Criterio MAP
+
+Voglio massimizzare la prbabilitá di corretta ricezione
+
+$$P_r(a_k = a^{(m)}|x(k)) = \frac{f_X(x(k)|a_k = a^{(m)})P_r(a_k = a^{(m)})}{f_X(x(k))}$$
+
+se i simboli non sono equiprobabili
+
+$$\Gamma_{(a^{(m)},x(k))} = \left[x(k)-a^{(m)}\right]^2-2\sigma^2\ln(P_m)$$
+
+In caso di simboli equiprobabili diventa il criterio a massima verosomiglianza
+
+$$\left[x(k)-a^{(i)}\right]^2 < \left[x(k)-a^{(l)}\right]^2$$
+
+#### Valori con filtro a radice di coseno rialzato
+
+- Symbol Error Rate (SER)
+: $SER = \cfrac{2(M-1)}{M}\cdot Q\left(\sqrt{\cfrac{6(E_s/N_0)\log_2M}{M^2-1}}\right)$
+
+- Banda del segnale
+: $B_T = \cfrac{1+\alpha}{2T}$
+
+- Efficienza spettrale:
+: $\eta_{sp} = \cfrac{2\log_2M}{1+\alpha}$
+
+- Bit Error Rate (BER) con codifica GRAY
+: $BER = \cfrac{2(M-1)}{M\log_2M}\cdot Q\left(\sqrt{\cfrac{6(E_d/N_0)\log_2M}{M^2-1}}\right)$
+
+### QAM
+
+Il *Quadrature Amplitude Modulation* (QAM) è un sistema di comunicazione in banda passante. La cardinalità $M$ è una potenza di $4$.
+
+![QAM](img/qam_trasmettitore.png)
+
+![QAM](img/qam_ricevitore.png)
+
+#### Valori
+
+- Densità spettrale di potenza
+: $S_s(f) = \frac{2(M-1)}{3T}|G_T(f)|^2$
+
+- Efficienza spettrale:
+: $\eta_{sp} = \cfrac{\log_2M}{1+\alpha}$
+
+- Bit Error Rate (BER) con codifica GRAY
+: $BER = \cfrac{4(\sqrt{M}-1)}{\sqrt{M}\log_2M}\cdot Q\left(\sqrt{\cfrac{3(E_d/N_0)\log_2M}{M-1}}\right)$
+
+- Banda del segnale
+: $B_T = \cfrac{1+\alpha}{T}$
+
+- Symbol Error Rate (SER)
+: $SER = \cfrac{4(\sqrt{M}-1)}{\sqrt{M}}\cdot Q\left(\sqrt{\cfrac{3(E_s/N_0)\log_2M}{M-1}}\right)$
