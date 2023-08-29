@@ -158,9 +158,9 @@ $$\large x(t-t_0)\leftrightharpoons X(f)e^{-j2\pi ft_0}$$
     Si effettua un cambiamento di variabile $\alpha=t-t_0$
 
     $$\begin{align}
-    \notag \cal{F}\\{x(t-t_0)\\} = &\leftrightharpoons\int\limits_{-\infty}^{\infty}x(\alpha)e^{-j2\pi f(\alpha+t_0)}d\alpha \newline
-    \notag &\leftrightharpoons e^{-j2\pi ft_0}\int\limits_{-\infty}^{\infty}x(\alpha)e^{-j2\pi f\alpha}d\alpha \newline
-    \notag &\leftrightharpoons X(f)e^{-j2\pi ft_0}
+    \notag \cal{F}\\{x(t-t_0)\\} = &\int\limits_{-\infty}^{\infty}x(\alpha)e^{-j2\pi f(\alpha+t_0)}d\alpha \newline
+    \notag &= e^{-j2\pi ft_0}\int\limits_{-\infty}^{\infty}x(\alpha)e^{-j2\pi f\alpha}d\alpha \newline
+    \notag &= X(f)e^{-j2\pi ft_0}
     \end{align}$$
 
 ### Teorema della modulazione
