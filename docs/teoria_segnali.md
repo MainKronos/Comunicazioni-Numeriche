@@ -101,7 +101,7 @@ $$\large\begin{align}
 |:-:|:-:|
 |$u(t)$|$\frac{1}{2}\;\delta(f)+\frac{1}{j2\pi f}$|
 |$\delta(t)$|$1$|
-|$\text{rect}\left(\frac{t}{T}\right)$|$T\;\text{rect}(fT)$|
+|$\text{rect}\left(\frac{t}{T}\right)$|$T\;\text{sinc}(fT)$|
 |$\cos(2\pi f_0t)$|$\frac{\delta(f-f_0)}{2}+\frac{\delta(f+f_0)}{2}$|
 |$\sin(2\pi f_0t)$|$\frac{\delta(f-f_0)}{2j}+\frac{\delta(f+f_0)}{2j}$|
 
@@ -279,7 +279,7 @@ $$h(t) = T[\delta(t)]$$
 - **Causalità**
 : Un sistema è causale quando il valore dell'uscita all'istante arbitrario generico $t$ dipende soltanto dai valori assunti dall'ingresso agli istanti precedenti (o al limite coincidenti con) $t$ stesso.
 - **Memoria**
-: Un sistema è con memorio se iIl calcolo del valore dell'uscita all'istante $t$ presuppone la conoscenza dell'andamento del segnale degli istanti precedenti.
+: Un sistema è con memoria se il calcolo del valore dell'uscita all'istante $t$ presuppone la conoscenza dell'andamento del segnale degli istanti precedenti.
 - **Stabilità**
 : Un sistema è stabile se, sollecitato da un segnale con andamento arbitrario ma di ampiezza limitata, produce a sua volta in uscita un segnale di ampiezza limitata.
 - **Invertibilità**
@@ -416,7 +416,7 @@ $$x(t)=\sum\limits_{n}^{\infin}x[n]\cdot\text{sinc}\left(\cfrac{t-nT}{T}\right)$
 : $\mu_X = \mathbb{E}[X] = \int\limits_{-\infin}^{\infin}x\;f_X(x)dx$
 
 - Varianza
-: $\sigma_X^2 = \int\limits_{-\infin}^{\infin}(x-\eta_{X})^2f_X(x)dx = E[X^2] - \mu_X^2$
+: $\sigma_X^2 = \int\limits_{-\infin}^{\infin}(x-\mu_{X})^2f_X(x)dx = E[X^2] - \mu_X^2$
 
 - Deviazione standard
 : $\sigma_X = \sqrt{\sigma_X^2}$
