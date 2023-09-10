@@ -605,7 +605,7 @@ Le condizioni di Nyquist nel dominio della frequenza :
 $$\sum\limits_{l=-\infin}^{\infin}G\left(f-\frac{l}{T}\right)=T$$
 
 !!! tip "indicano chiaramente:"
-    Condizione **NECESSARIA** (ma non sufficiente) affinchè un impulso $g(t)$ sia di Nyquist è che la sua trasformata di Fourier $G(f)$ abbia banda almeno pari a $1/2T$
+    Condizione **NECESSARIA** (ma non sufficiente) affinchè un impulso $g(t)$ sia di Nyquist è che la sua trasformata di Fourier $G(f)$ abbia banda $B\ge 1/2T$
 
 #### Filtro adattato
 
@@ -642,7 +642,7 @@ $$\left[x(k)-a^{(i)}\right]^2 < \left[x(k)-a^{(l)}\right]^2$$
 #### Valori con filtro a radice di coseno rialzato
 
 - Symbol Error Rate (SER)
-: $SER = \cfrac{2(M-1)}{M}\cdot Q\left(\sqrt{\cfrac{6(E_s/N_0)\log_2M}{M^2-1}}\right)$
+: $SER = \cfrac{2(M-1)}{M}\cdot Q\left(\sqrt{\cfrac{6(E_d/N_0)\log_2M}{M^2-1}}\right)$
 
 - Banda del segnale
 : $B_T = \cfrac{1+\alpha}{2T}$
@@ -676,4 +676,4 @@ Il *Quadrature Amplitude Modulation* (QAM) è un sistema di comunicazione in ban
 : $B_T = \cfrac{1+\alpha}{T}$
 
 - Symbol Error Rate (SER)
-: $SER = \cfrac{4(\sqrt{M}-1)}{\sqrt{M}}\cdot Q\left(\sqrt{\cfrac{3(E_s/N_0)\log_2M}{M-1}}\right)$
+: $SER = \cfrac{4(\sqrt{M}-1)}{\sqrt{M}}\cdot Q\left(\sqrt{\cfrac{3(E_d/N_0)\log_2M}{M-1}}\right)$
