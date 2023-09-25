@@ -1,20 +1,44 @@
 ## Segnali Notevoli
 
+### Costante
+
+$$x(t)=A\quad\forall t$$
+
+- $E_x = \int\limits_{-\infty}^\infty A^2 dt = \infty$
+- $P_x = \lim\limits_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}A^2dt = A^2$
+- $x_{eff} = |A|$
+- $x_m = \lim\limits_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}A\;dt = A$
+
+### Sinusoide
+
+$$x(t) = Acos(2\pi f_0\;t + \phi)$$
+
+- $E_x = \int\limits_{-\infty}^\infty |x(t)|^2 dt = \infty$
+- $P_x = \lim\limits_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}|x(t)|^2dt = \frac{A^2}{2}$
+- $x_{eff} = \frac{|A|}{\sqrt{2}}$
+- $x_m = \lim\limits_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)dt = 0$
+
+### Gradino
+
+$$u(t) = \begin{cases}1 \quad& t\ge 0 \newline 0\quad& t < 0\end{cases} \quad= \int\limits_{-\infty}^t\delta(\tau)d\tau $$
+
+- $E_x = \int\limits_{-\infty}^\infty u^2(t) dt = \infty$
+- $P_x = \lim\limits_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}u^2(t)dt = \frac{1}{2}$
+
 ### Rettangolo
 
 > Rettangolo di altezza $A$ e lunghezza $T$ centrato nell'origine.
 
-$$A\cdot\text{rect}\left(\frac{t}{T}\right)$$
+$$x(t) = A\cdot\text{rect}\left(\frac{t}{T}\right) = \begin{cases}A \quad& -\frac{T}{2}\le t\le \frac{T}{2} \newline 0\quad& \text{altrove}\end{cases}$$
+
+- $E_x = \int\limits_{-\infty}^\infty x^2(t) dt = A^2T$
+- $P_x = \lim\limits_{T_0\to\infty}\frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}}x^2(t)dt = 0$
 
 ### Seno Cardinale
 
 > $\sin(t)$ smorzato che si annulla in $t\pi : t \in \mathbb{Z}$
 
 $$\text{sinc}(t)=\cfrac{\sin(\pi t)}{\pi t}$$
-
-### Gradino
-
-$$u(t) = \begin{cases}1 \quad& t\ge 0 \newline 0\quad& t < 0\end{cases} \quad= \int\limits_{-\infty}^t\delta(\tau)d\tau $$
 
 ### Delta Di Dirac
 
@@ -40,11 +64,15 @@ $$\text{sgn}(t) = \begin{cases}1 \quad& t\ge 0 \newline -1\quad& t < 0\end{cases
 
 - Potenza Istantanea
 
-$$P_x = |x(t)|^2$$
+$$P_x(t) = |x(t)|^2$$
 
 - Energia
 
 $$E_x = \int\limits_{-\infty}^\infty P_x(t)dt = \int\limits_{-\infty}^\infty|x(t)|^2dt$$
+
+!!! Note
+	- Energia finita: Segnali fisici
+	- Energia infinita: Segnali ideali
 
 - Potenza Media
 
@@ -203,6 +231,10 @@ $$\large x(t)\leftrightharpoons X(f)\newline
 \int\limits_{-\infty}^{t} x(\alpha)d\alpha\leftrightharpoons \cfrac{X(f)}{j2\pi f}
 $$
 
+!!! note
+	Affinchè il teorema sia valido deve essere verificata l'uguaglianza:
+	$$X(0)=0=\int\limits_{-\infty}^{\infty}x(\alpha)d\alpha = y(+\infty)$$
+
 ??? abstract "Dimostrazione"
     Partendo dal segnale $y(t)$
     
@@ -222,6 +254,9 @@ $$\large x(t)\leftrightharpoons X(f)\newline
 \Updownarrow \newline
 \int\limits_{-\infty}^{t} x(\alpha)d\alpha\leftrightharpoons \cfrac{X(f)}{j2\pi f} + \cfrac{X(0)}{2}\delta(f)
 $$
+
+
+
 
 ### Teorema del prodotto
 
