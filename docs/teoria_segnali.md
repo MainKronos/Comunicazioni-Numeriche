@@ -34,6 +34,28 @@ $$x(t) = A\cdot\text{rect}\left(\frac{t}{T}\right) = \begin{cases}A \quad& -\fra
 - $E_x = \int\limits_{-\infty}^\infty x^2(t) dt = A^2T$
 - $P_x = \lim\limits_{T_0\to\infty}\frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}}x^2(t)dt = 0$
 
+### Esponenziale unilatero
+
+$$x(t) = e^{-t}\cdot u(t)$$
+
+- $E_x = \int\limits_{-\infty}^\infty x^2(t) dt = \frac{1}{2}$
+- $P_x = \lim\limits_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x^2(t)dt = 0$
+
+### Esponenziale bilatero
+
+$$x(t) = e^{-|t|}$$
+
+- $E_x = \int\limits_{-\infty}^\infty x^2(t) dt = 1$
+- $P_x = \lim\limits_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x^2(t)dt = 0$
+
+### Funzione Segno
+
+$$x(t) = \text{sgn}(t) = \begin{cases}1 \quad& t\ge 0 \newline -1\quad& t < 0\end{cases}$$
+
+- $E_x = \int\limits_{-\infty}^\infty x^2(t) dt = \infty$
+- $P_x = \lim\limits_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x^2(t)dt = 1$
+
+
 ### Seno Cardinale
 
 > $\sin(t)$ smorzato che si annulla in $t\pi : t \in \mathbb{Z}$
@@ -48,9 +70,7 @@ $$\delta(t)$$
 
 ![Alt text](img/Dirac_distribution_PDF.png){ width="400" }
 
-### Funzione Segno
 
-$$\text{sgn}(t) = \begin{cases}1 \quad& t\ge 0 \newline -1\quad& t < 0\end{cases}$$
 
 ### Impulso A Coseno Rialzato
 
