@@ -91,8 +91,8 @@ $$P_x(t) = |x(t)|^2$$
 $$E_x = \int\limits_{-\infty}^\infty P_x(t)dt = \int\limits_{-\infty}^\infty|x(t)|^2dt$$
 
 !!! Note
-	- Energia finita: Segnali fisici
-	- Energia infinita: Segnali ideali
+    - Energia finita: Segnali fisici
+    - Energia infinita: Segnali ideali
 
 - Potenza Media
 
@@ -153,6 +153,15 @@ $$\large\begin{align}
 |$\cos(2\pi f_0t)$|$\frac{\delta(f-f_0)}{2}+\frac{\delta(f+f_0)}{2}$|
 |$\sin(2\pi f_0t)$|$\frac{\delta(f-f_0)}{2j}+\frac{\delta(f+f_0)}{2j}$|
 
+??? abstract "$x(t) = A\;\text{rect}(t/T)$"
+    $$\begin{align}
+    \notag X(f) &= \int\limits_{-\infty}^\infty A\;\text{rect}(t/T)e^{-j2\pi ft}dt \newline
+    \notag &= A\int\limits_{-T/2}^{T/2} e^{-j2\pi ft}dt \newline
+    \notag &= \frac{A}{-j2\pi f}(e^{-j\pi fT} - e^{j\pi fT}) \newline
+    \notag &= \frac{AT}{\pi fT}\sin(\pi fT) \newline
+    \notag &= AT\;\text{sinc}(fT)
+    \end{align}$$
+
 ---
 
 ## Teoremi
@@ -211,7 +220,7 @@ $$\large x(t-t_0)\leftrightharpoons X(f)e^{-j2\pi ft_0}$$
     \notag &= X(f)e^{-j2\pi ft_0}
     \end{align}$$
 
-### Teorema della modulazione
+### Teorema della modulazione (coseno)
 
 $$\large x(t)\cos(2\pi f_0t)\leftrightharpoons\cfrac{X(f-f_0)+X(f+f_0)}{2}$$
 
@@ -221,6 +230,29 @@ $$\large x(t)\cos(2\pi f_0t)\leftrightharpoons\cfrac{X(f-f_0)+X(f+f_0)}{2}$$
     \notag &= \int\limits_{-\infty}^{\infty}x(t)\cfrac{e^{j2\pi f_0t}+e^{-j2\pi f_0t}}{2} \cdot e^{-j2\pi ft}dt \newline
     \notag &= \cfrac{1}{2}\int\limits_{-\infty}^{\infty}x(t)e^{-j2\pi (f-f_0)t}dt+\cfrac{1}{2}\int\limits_{-\infty}^{\infty}x(t)e^{-j2\pi (f+f_0)t}dt \newline
     \notag &=\cfrac{1}{2}\cdot X(f-f_0)+\cfrac{1}{2}\cdot X(f+f_0)
+    \end{align}$$
+
+### Teorema della modulazione (seno)
+
+$$\large x(t)\sin(2\pi f_0t)\leftrightharpoons\cfrac{X(f-f_0)-X(f+f_0)}{2j}$$
+
+??? abstract "Dimostrazione"
+    $$\begin{align}
+    \notag \cal{F}\\{x(t)\sin(2\pi f_0t)\\} &= \int\limits_{-\infty}^{\infty}x(t)\sin(2\pi f_0t)e^{-j2\pi ft}dt \newline
+    \notag &= \int\limits_{-\infty}^{\infty}x(t)\cfrac{e^{j2\pi f_0t}-e^{-j2\pi f_0t}}{2j} \cdot e^{-j2\pi ft}dt \newline
+    \notag &= \cfrac{1}{2j}\int\limits_{-\infty}^{\infty}x(t)e^{-j2\pi (f-f_0)t}dt-\cfrac{1}{2j}\int\limits_{-\infty}^{\infty}x(t)e^{-j2\pi (f+f_0)t}dt \newline
+    \notag &=\cfrac{1}{2j}\cdot X(f-f_0)-\cfrac{1}{2j}\cdot X(f+f_0)
+    \end{align}$$
+
+### Teorema della modulazione (esponenziale complesso)
+
+$$\large x(t) e^{j2\pi f_0t}\leftrightharpoons X(f-f_0)$$
+
+??? abstract "Dimostrazione"
+    $$\begin{align}
+    \notag \cal{F}\\{x(t) e^{j2\pi f_0t}\\} &= \int\limits_{-\infty}^{\infty}x(t) e^{j2\pi f_0t}e^{-j2\pi ft}dt \newline
+    \notag &= \int\limits_{-\infty}^{\infty}x(t)e^{-j2\pi (f-f_0)t}dt \newline
+    \notag &=X(f-f_0)
     \end{align}$$
 
 ### Teorema della derivazione
@@ -252,8 +284,8 @@ $$\large x(t)\leftrightharpoons X(f)\newline
 $$
 
 !!! note
-	Affinchè il teorema sia valido deve essere verificata l'uguaglianza:
-	$$X(0)=0=\int\limits_{-\infty}^{\infty}x(\alpha)d\alpha = y(+\infty)$$
+    Affinchè il teorema sia valido deve essere verificata l'uguaglianza:
+    $$X(0)=\int\limits_{-\infty}^{\infty}x(t)dt = y(+\infty) =0$$
 
 ??? abstract "Dimostrazione"
     Partendo dal segnale $y(t)$
@@ -276,8 +308,6 @@ $$\large x(t)\leftrightharpoons X(f)\newline
 $$
 
 
-
-
 ### Teorema del prodotto
 
 $$\large z(t)=x(t)\cdot y(t)\newline
@@ -294,6 +324,14 @@ $$
     \notag &= \int\limits_{v=-\infty}^{\infty}X(v)Y(f-v)dv \newline
     \notag &= X(f)\otimes Y(f)
     \end{align}$$
+
+??? note "Proprietà convoluzione"
+	- Commutativa
+	: $x(t)\otimes y(t) = y(t)\otimes x(t)$
+	- Distributiva
+	: $x(t)\otimes\left(y(t)+z(t)\right) = x(t)\otimes y(t)+x(t)\otimes z(t)$
+	- Associativa
+	: $(x(t)\otimes y(t))\otimes z(t) = x(t)\otimes(y(t)\otimes z(t))$
 
 ### Teorema di Parseval
 
