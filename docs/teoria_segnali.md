@@ -66,7 +66,7 @@ $$\text{sinc}(t)=\cfrac{\sin(\pi t)}{\pi t}$$
 
 > Funzione impulso ad area unitaria
 
-$$\delta(t)$$
+$$\delta(t) = \lim\limits_{\epsilon\to\infty}\frac{1}{\epsilon}\cdot\text{rect}\left(\frac{t}{\epsilon}\right)$$
 
 ![Alt text](img/Dirac_distribution_PDF.png){ width="400" }
 
@@ -162,6 +162,16 @@ $$\large\begin{align}
     \notag &= AT\;\text{sinc}(fT)
     \end{align}$$
 
+??? abstract "$x(t) = u(t)$"
+    $$U(f) = \int\limits_{-\infty}^\infty u(t)e^{-j2\pi ft}dt$$
+
+    Sostituisco $u(t)$ con $\frac{1}{2} + \frac{1}{2}\cdot\text{sign}(t)$
+
+    $$\begin{align}
+    \notag U(f) &= \int\limits_{-\infty}^\infty \left(\frac{1}{2} + \frac{1}{2}\cdot\text{sign}(t)\right)e^{-j2\pi ft}dt \newline
+    \notag &= \int\limits_{-\infty}^\infty \frac{1}{2}\cdot e^{-j2\pi ft}dt + \int\limits_{-\infty}^\infty \frac{1}{2}\cdot\text{sign}(t)\cdot e^{-j2\pi ft}dt \newline
+    \notag &= \frac{1}{2}\;\delta(f) + \frac{1}{j2\pi f}
+    \end{align}$$
 ---
 
 ## Teoremi
@@ -307,6 +317,22 @@ $$\large x(t)\leftrightharpoons X(f)\newline
 \int\limits_{-\infty}^{t} x(\alpha)d\alpha\leftrightharpoons \cfrac{X(f)}{j2\pi f} + \cfrac{X(0)}{2}\delta(f)
 $$
 
+??? abstract "Dimostrazione"
+    Partendo dal segnale $y(t)$
+
+    $$\begin{align}
+    \notag y(t) &= \int\limits_{-\infty}^{t} x(\alpha)d\alpha \newline
+    \notag &= \int\limits_{-\infty}^\infty x(\alpha)u(t-\alpha)d\alpha \newline
+    \notag &= x(t)\otimes u(t)
+    \end{align}$$
+
+    Per il teorema della convoluzione otteniamo
+
+    $$\begin{align}
+    \notag Y(f) &= X(f)\cdot U(f) \newline
+    \notag &= X(f)\left( \frac{1}{2}\;\delta(f)+\frac{1}{j2\pi f}\right) \newline
+    \notag &= \cfrac{X(0)}{2}\delta(f) + \cfrac{X(f)}{j2\pi f}
+    \end{align}$$
 
 ### Teorema del prodotto
 
@@ -326,12 +352,12 @@ $$
     \end{align}$$
 
 ??? note "Proprietà convoluzione"
-	- Commutativa
-	: $x(t)\otimes y(t) = y(t)\otimes x(t)$
-	- Distributiva
-	: $x(t)\otimes\left(y(t)+z(t)\right) = x(t)\otimes y(t)+x(t)\otimes z(t)$
-	- Associativa
-	: $(x(t)\otimes y(t))\otimes z(t) = x(t)\otimes(y(t)\otimes z(t))$
+    - Commutativa
+    : $x(t)\otimes y(t) = y(t)\otimes x(t)$
+    - Distributiva
+    : $x(t)\otimes\left(y(t)+z(t)\right) = x(t)\otimes y(t)+x(t)\otimes z(t)$
+    - Associativa
+    : $(x(t)\otimes y(t))\otimes z(t) = x(t)\otimes(y(t)\otimes z(t))$
 
 ### Teorema di Parseval
 
