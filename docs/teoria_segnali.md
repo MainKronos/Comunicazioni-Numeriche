@@ -88,7 +88,7 @@ $$P_x(t) = |x(t)|^2$$
 
 - Energia
 
-$$E_x = \int\limits_{-\infty}^\infty P_x(t)dt = \int\limits_{-\infty}^\infty|x(t)|^2dt$$
+$$E_x = \int\limits_{-\infty}^\infty P_x(t)dt = \int\limits_{-\infty}^\infty|x(t)|^2dt = \int\limits_{-\infty}^\infty|X(f)|^2dt$$
 
 !!! Note
     - Energia finita: Segnali fisici
@@ -114,6 +114,43 @@ $$\begin{align}
 \notag \text{Densità spettrale di energia:}\quad& E_{X_T}(f)=|X_T(f)|^2 \newline
 \notag \text{Densità spettrale di potenza:}\quad& S_X(f)=\lim\limits_{T\rarr\infin}\cfrac{|X_T(f)|^2}{T}
 \end{align}$$
+
+### Correlazione tra segnali periodici
+
+- Correlazione
+: $C_{x,y}(\tau) = \int\limits_{-\infty}^\infty x(t)\cdot y^{*}(t-\tau) dt$
+
+- Autocorrelazione
+: $C_x(\tau) = \int\limits_{-\infty}^\infty x(t)\cdot x^{*}(t-\tau) dt$
+
+??? note "Proprietà autocorrelazione"
+    - Energia
+    : $$\begin{align}
+    \notag C_x(0) &= \int\limits_{-\infty}^\infty x(t)\cdot x^{*}(t) dt \newline
+    \notag &= \int\limits_{-\infty}^\infty |x(t)|^2 dt \newline
+    \notag &= E_x
+    \end{align}$$
+
+    - Simmetria Hermitiana
+    : $$C_x^{*}(\tau) = C_x(-\tau)$$
+    
+    - TCF dell'autocorrelazione
+    $$\begin{align}
+    \notag S_x(f) &= \cal{F}\left\\{C_x(\tau)\right\\} \newline
+    \notag &= \int\limits_{-\infty}^{\infty} C_x(\tau)\;e^{-j2\pi f\tau}d\tau \newline
+    \notag &= \int\limits_{\tau=-\infty}^{\infty} \left(\int\limits_{t=-\infty}^\infty x(t)\cdot x^{*}(t-\tau) dt\right) e^{-j2\pi f\tau} d\tau \newline
+    \notag &= \int\limits_{t=-\infty}^\infty x(t) \left(\int\limits_{\tau=-\infty}^{\infty} x^{\*}(t-\tau) e^{-j2\pi f\tau} d\tau \right) dt 
+    \end{align}$$
+    Scambio $t-\tau$ con $\tau'$
+    $$\begin{align}
+    \notag S_x(f) &= \int\limits_{t=-\infty}^\infty x(t) \left(\int\limits_{\tau'=-\infty}^{\infty} x^{\*}(\tau') e^{-j2\pi f(t-\tau')} d\tau' \right) dt \newline
+    \notag  &= \int\limits_{-\infty}^{\infty} x(t) e^{-j2\pi ft} dt \int\limits_{-\infty}^{\infty} x^{\*}(\tau') e^{j2\pi f\tau'} d\tau' \newline
+    \notag &= X(f)X^{\*}(f) \newline
+    \notag &= |X(f)|^2
+    \end{align}$$
+
+- Densità spettrale di energia
+: $S_x(f) = |X(f)|^2$
 
 ---
 
@@ -377,7 +414,15 @@ $$\large \int\limits_{-\infin}^\infin|x(t)|^2dt = \int\limits_{-\infin}^\infin\l
 
 Evidenzia che periodicizzare nel tempo una funzione aperiodica e uguale a campionare in frequenza ad intervallid $T_0$
 
-$$\large\sum\limits_{n=-\infty}^{+\infty}x(t-nT_0)=\sum\limits_{k=-\infty}^{+\infty}\cfrac{1}{T_0}\cdot X\left(\cfrac{k}{T_0}\right)e^{j\frac{2\pi kt}{T_0}}$$
+$$\large\sum\limits_{n=-\infty}^{+\infty}x(t-nT_0)=\cfrac{1}{T_0}\sum\limits_{k=-\infty}^{+\infty}\cdot X\left(\cfrac{k}{T_0}\right)e^{j\frac{2\pi kt}{T_0}}$$
+
+??? abstract "Dimostrazione"
+    $$\begin{align}
+    \notag y(t) &= \sum\limits_{n=-\infty}^{+\infty}x(t-nT_0) \newline
+    \notag Y(f) &= \cfrac{1}{T_0}\; X\left(\cfrac{n}{T_0}\right) \newline
+    \notag \sum\limits_{n=-\infty}^{+\infty}x(t-nT_0) &= \sum\limits_{n=-\infty}^{+\infty} \cfrac{1}{T_0} X\left(\cfrac{n}{T_0}\right) e^{j2\pi nf_0t} \newline
+    \notag &= \cfrac{1}{T_0}\sum\limits_{n=-\infty}^{+\infty}\cdot X\left(\cfrac{n}{T_0}\right)e^{j\frac{2\pi nt}{T_0}}
+    \end{align}$$
 
 ---
 
@@ -385,26 +430,79 @@ $$\large\sum\limits_{n=-\infty}^{+\infty}x(t-nT_0)=\sum\limits_{k=-\infty}^{+\in
 
 Un sistema è una trasformazione che ad un segnale di ingresso $x(t)$ fa corrispondere un ben determinato segnale d'uscita $y(t)$. La trasformazione del segnale $x(t)$ nel segnale $y(t)$ si denota nel modo seguente:
 
-$$y(t)=T[x(t)] = x(t) \otimes h(t)$$
-
-$h(t)$ è la risposta impulsiva:
-
-$$h(t) = T[\delta(t)]$$
+$$y(t)=T[x(t)]$$
 
 ### Proprietà
 
-- **Stazionarietà**
-: Un sistema è stazionario se le caratteristiche del sistema non variano nel tempo.
-- **Causalità**
-: Un sistema è causale quando il valore dell'uscita all'istante arbitrario generico $t$ dipende soltanto dai valori assunti dall'ingresso agli istanti precedenti (o al limite coincidenti con) $t$ stesso.
-- **Memoria**
-: Un sistema è con memoria se il calcolo del valore dell'uscita all'istante $t$ presuppone la conoscenza dell'andamento del segnale degli istanti precedenti.
-- **Stabilità**
-: Un sistema è stabile se, sollecitato da un segnale con andamento arbitrario ma di ampiezza limitata, produce a sua volta in uscita un segnale di ampiezza limitata.
-- **Invertibilità**
-: Un sistema è invertibile se è possibile ricostruire il segnale di eccitazione in ingresso a un sistema se è nota la risposta al segnale stesso
-- **Linearità**
-: Un sistema è lineare se a esso è applicabile il principio di sovrapposizione degli effetti.
+???+ abstract "Stazionarietà"
+    Un sistema è stazionario se le caratteristiche del sistema non variano nel tempo.
+
+    > Se:
+    > $$y(t) = T[x(t)]$$
+    > allora
+    > $$y(t-t_0) = t[x(t-t_0)]$$
+
+???+ abstract "Causalità"
+    Un sistema è causale quando il valore dell'uscita all'istante arbitrario generico $t$ dipende soltanto dai valori assunti dall'ingresso agli istanti precedenti (o al limite coincidenti con) $t$ stesso.
+
+    > $$y(t) = T[x(\alpha); \alpha\le t]$$
+
+???+ abstract "Memoria"
+    Un sistema è con memoria se il calcolo del valore dell'uscita all'istante $t$ presuppone la conoscenza dell'andamento del segnale degli istanti precedenti.
+
+    > Un sistema è **senza** memoria se:
+    $$y(t) = T[x(\alpha); \alpha = t]$$
+
+???+ abstract "Stabilità"
+    Un sistema è stabile se, sollecitato da un segnale con andamento arbitrario ma di ampiezza limitata, produce a sua volta in uscita un segnale di ampiezza limitata.
+
+    > se:
+    > $$|x(t)|\le M < \infty$$
+    > allora
+    > $$|y(t)|\le N < \infty$$
+
+???+ abstract "Invertibilità"
+    Un sistema è invertibile se è possibile ricostruire il segnale di eccitazione in ingresso a un sistema se è nota la risposta al segnale stesso
+
+	> Se:
+	> $$y(t) = T[x(t)]$$
+	> allora
+	> $$x(t) = T^{-1}[y(t)]$$
+
+???+ abstract "Linearità"
+    Un sistema è lineare se a esso è applicabile il principio di sovrapposizione degli effetti.
+
+    > Se:
+    > $$x(t) = ax_1(t)+bx_2(t)$$
+    > allora
+    > $$y(t) = T[x(t)] = aT[x_1(t)]+bT[x_2(t)]$$
+
+## Sistemi Lineari Stazionari (SLS)
+
+Definita la risposta impulsivga di un sistema lineare stazionario come:
+
+$$h(t) = T[\delta(t)]$$
+
+Allora la trasformazione del sistema è possibile scriverla come:
+
+$$y(t)=T[x(t)] = x(t) \otimes h(t) = \int\limits_{-\infty}^{\infty}x(\tau)h(t-\tau)d\tau$$
+
+???+ abstract "Dimostrazione"
+    $$\begin{align}
+    \notag y(t) &= T[x(t)] \newline
+    \notag &= T[x(t)\otimes \delta(t)] \newline
+    \notag &= T\left[\int\limits_{-\infty}^{\infty}x(\tau)\delta(t-\tau)d\tau\right] \newline
+    \notag &= \int\limits_{-\infty}^{\infty}x(\tau)\;T[\;\delta(t-\tau)\;]d\tau \newline
+    \notag &= \int\limits_{-\infty}^{\infty}x(\tau)h(t-\tau)d\tau \newline
+    \notag &= x(t) \otimes h(t)
+    \end{align}$$
+
+
+### Risposta in frequenza
+
+1. $H(f) = \cfrac{y(t)}{x(t)} \quad\text{quando} \quad x(t) = e^{j2\pi ft}$
+2. $H(f) = \cal{F}\\{h(t)\\}$
+3. $H(f) = \cfrac{Y(f)}{X(F)}$
 
 ### Sistemi in cascata
 
@@ -442,7 +540,7 @@ $$\begin{align}
 
 $$\begin{align}
 \notag \text{Risposta in Frequenza:}\quad& H_{BP}(f) = H_{LP}(f+f_0) + H_{LP}(f-f_0) \newline
-\notag \text{Risposta Impulsiva:}\quad& h_{BP}(t) = h_{LP}\cos(2\pi f_0t)
+\notag \text{Risposta Impulsiva:}\quad& h_{BP}(t) = 2B\text{sinc}(Bt)\cos(2\pi f_0t)
 \end{align}$$
 
 ### Filtro Elimina Banda
@@ -451,6 +549,31 @@ $$\begin{align}
 \notag \text{Risposta in Frequenza:}\quad& H_{BS}(f) = 1 -  H_{BP}(f) \newline
 \notag \text{Risposta Impulsiva:}\quad& h_{BS}(t) = \delta(t) - h_{BP}(t)
 \end{align}$$
+
+### Filtro non distorcente
+
+un filtro non distorcente è un sistema la cui $h(t)$ è tale da non distorcere $y(t)$, ovvero si deve avere $y(t) = kx(t-t_0)$, ovvero è possibile solo amplificare, attenuare o ritardare $x$. Ad esempio:
+$$h(t) = k\delta(t-t_0)$$
+
+questo filtro non distorce nessun tipo di segnale, però può essere conveniente rendere la definizione meno stringente, ovvero definire il filtro non distorcente dipendentemente dal tipo di segnale con cui si ha a che fare, ovvero un filtro che non distorce nella banda che ci interessa. Più concretamente quello che ci interessa è che il filtro abbia ampiezza costante (in frequenza) e fase lineare all’interno della banda del segnale
+
+---
+
+## Relazione tra durata e banda
+
+se $x(t)$ è un segnale a durata rigorosamente limitata, cioè:
+
+$$x(t) = 0 \quad\text{per}\quad |t|>\frac{T}{2}$$
+
+allora:
+
+$$\begin{align}
+\notag X(f) &= \text{TCF}\left[x(t)\right] \newline
+\notag &= \text{TCF}\left[x(t)\cdot\text{rect}\left(\frac{t}{T}\right)\right]  \newline
+\notag &= X(f)\otimes T\text{sinc}(Tf)
+\end{align}$$
+
+$\to X(f)\otimes T\text{sinc}(Tf)$ ha banda infinita
 
 ---
 
