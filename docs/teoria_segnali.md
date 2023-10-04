@@ -716,6 +716,12 @@ $$x(t)=\sum\limits_{n}^{\infin}x[n]\cdot\text{sinc}\left(\cfrac{t-nT}{T}\right)$
 - Coefficiente di correlazione
 : $\rho_{XY} = \cfrac{c_{XY}}{\sigma_X\sigma_Y}$
 
+### Proprietà
+
+- $f_X(x)\ge 0$
+- $Pr(x_1\le X \le x_2) = \int_{x_1}^{x_2} f_X(x) dx$
+- $\int\limits_{-\infty}^{\infty}f_X(x)dx = 1$
+
 ### Somma di variabili aleatorie indipendenti
 
 Se $X$ e $Y$ sono 2 variabili aleatorie statisticamente indipendenti e con densità di probabilità $f_X(x)$ e $f_Y(y)$ allora si definisce $Z=X+Y$ la cui funzione densità di probabilità:
@@ -757,6 +763,12 @@ Data una variabile aleatoria $X \in \cal{N}(\mu_X,\sigma_X^2)$ definiamo $Y=aX+b
 
 - varianza
 : $\sigma_Y^2 = a^2\cdot\sigma_X^2$
+
+#### Funzione Q
+
+Si introduce la funzione $Q$ perchè non è possibile calcolare in forma chiusa la funzione distribuzione di una Gaussiana
+
+$$Q = \frac{1}{\sqrt{2\pi}}\int\limits_x^{\infty}e^{-\normalsize{\frac{z^2}{2}}}dz$$
 
 ### Teorema del valore centrale
 
