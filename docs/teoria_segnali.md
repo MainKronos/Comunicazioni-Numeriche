@@ -152,6 +152,18 @@ $$\begin{align}
 - Densità spettrale di energia
 : $S_x(f) = |X(f)|^2$
 
+## Grandezze Energetiche TDF
+
+- Autocorrelazione
+: $R_x[m] = \sum\limits_{n=-\infty}^{\infty}x[n]x^{\*}[n-m]$
+
+- Densità spettrale di energia
+: $\overline{S}_x(f) = TDF[R_x[m]] = |\overline{X(f)}|^2$
+
+- Energia
+: $E_x = T\int\limits_{-\infty}^\infty \overline{S}_x(f)df$
+: $= \sum\limits_{n=-\infty}^{\infty}|x[n]|^2dt$
+
 ---
 
 ## Trasformate Di Fourier
@@ -174,8 +186,8 @@ $$\large\begin{align}
 
 $$\large\begin{align}
 \notag \text{Equazione di sintesi:}\quad& x[n]=T\int_{-\frac{1}{2T}}^{\frac{1}{2T}}
-\overline{X}(f)e^{j2\pi nft}df \newline
-\notag \text{Equazione di analisi:}\quad& \overline{X}(f)=\sum\limits_{n=-\infty}^{\infty}x[n]e^{-j2\pi nf_0t}
+\overline{X}(f)e^{j2\pi nfT}df \newline
+\notag \text{Equazione di analisi:}\quad& \overline{X}(f)=\sum\limits_{n=-\infty}^{\infty}x[n]e^{-j2\pi nfT}
 \end{align}$$
 
 ---
@@ -575,13 +587,34 @@ $$\begin{align}
 
 $\to X(f)\otimes T\text{sinc}(Tf)$ ha banda infinita
 
+## Relazione tra TCF e TSF
+
+Se:
+$$\begin{align}
+\notag X(f) &\leftrightharpoons x(t) \newline
+\notag \overline{X}(f) &\leftrightharpoons x[n] \newline
+\end{align}$$
+
+allora
+
+$$\begin{align}
+\notag \overline{X}(f) &= \sum\limits_{n=-\infty}^{\infty}x[n]e^{-j2\pi nfT} \newline
+\notag &= \sum\limits_{n=-\infty}^{\infty}x(nT)e^{-j2\pi nfT} \newline
+\notag &= \sum\limits_{n=-\infty}^{\infty}\int\limits_{-\infty}^{\infty}X(v) e^{j2\pi vnT} dv\; e^{-j2\pi nfT} \newline
+\notag &= \int\limits_{-\infty}^{\infty}X(v)\sum\limits_{n=-\infty}^{\infty} e^{-j2\pi (f-v)nT} dv \newline
+\notag &= \frac{1}{T}\sum\limits_{n=-\infty}^{\infty}\int\limits_{-\infty}^{\infty}X(v)\delta\left(f-v-\frac{n}{T}\right) dv  \newline
+\notag &= \frac{1}{T}\sum\limits_{n=-\infty}^{\infty}\int\limits_{-\infty}^{\infty}X(v)\delta\left[\left(f-\frac{n}{T}\right)-v\right] dv \newline
+\notag &= \frac{1}{T}\sum\limits_{n=-\infty}^{\infty}X(f)\otimes\delta\left(f-\frac{n}{T}\right) \newline
+\notag &= \frac{1}{T}\sum\limits_{n=-\infty}^{\infty}X\left(f-\frac{n}{T}\right)
+\end{align}$$
+
 ---
 
 ## Nyquist
 
 ### Condizioe di Nyquist
 
-Campionando un segnale analogico con frequenza di campionamento $f_c = \frac{1}{T} \ge 2B$ otteniamo copie distinte, non distorte e di periodo $\frac{1}{T}$ dello spettro frequenziale $X(f)$
+Campionando un segnale analogico, a banda rigorosamente limitata, con frequenza di campionamento $f_c = \frac{1}{T} \ge 2B$ otteniamo copie distinte, non distorte e di periodo $\frac{1}{T}$ dello spettro frequenziale $X(f)$
 
 ### Teorema del Campionamento
 
@@ -632,6 +665,20 @@ $$x(t)=\sum\limits_{n}^{\infin}x[n]\cdot\text{sinc}\left(\cfrac{t-nT}{T}\right)$
 
 - Legge della probabilità totale
 : $Pr(A) = \sum\limits_{i=1}^{N}Pr(A|B_i)\cdot Pr(B_i)$
+
+### Assiomi
+
+- Non negatività
+: $\forall\;\text{evento}\;A, \quad 0\le Pr(A) \le 1$
+- Additività
+: $\text{Se}\; A\cap B = 0, \quad Pr(A\cup B) = Pr(A) + Pr(B)$
+
+### Proprietà
+
+- $Pr(\bar{A}) = 1 - Pr(A)$
+- $Pr(0) = 0$
+- $Pr(\Omega) = 1$
+- $Pr(A\cup B) Pr(A) + Pr(B) - Pr(A\cap B)$
 
 ---
 
