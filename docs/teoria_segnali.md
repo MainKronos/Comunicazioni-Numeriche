@@ -705,10 +705,13 @@ $$x(t)=\sum\limits_{n}^{\infin}x[n]\cdot\text{sinc}\left(\cfrac{t-nT}{T}\right)$
 : $\mu_X = \mathbb{E}[X] = \int\limits_{-\infin}^{\infin}x\;f_X(x)dx$
 
 - Varianza
-: $\sigma_X^2 = \int\limits_{-\infin}^{\infin}(x-\mu_{X})^2f_X(x)dx = E[X^2] - \mu_X^2$
+: $\sigma_X^2 = \int\limits_{-\infin}^{\infin}(x-\mu_{X})^2f_X(x)dx = E[(X - \mu_X)^2]$
 
 - Deviazione standard
 : $\sigma_X = \sqrt{\sigma_X^2}$
+
+- Valore quadratico medio
+: $m_X^2 = E[X^2] = \int\limits_{-\infin}^{\infin}x^2\;f_X(x)dx$
 
 - Covarianza
 : $c_{XY} = \mathbb{E}[XY]-\mu_X\mu_Y$
@@ -721,6 +724,16 @@ $$x(t)=\sum\limits_{n}^{\infin}x[n]\cdot\text{sinc}\left(\cfrac{t-nT}{T}\right)$
 - $f_X(x)\ge 0$
 - $Pr(x_1\le X \le x_2) = \int_{x_1}^{x_2} f_X(x) dx$
 - $\int\limits_{-\infty}^{\infty}f_X(x)dx = 1$
+
+### Relazione tra $\mu_X$, $\sigma_X^2$, $m_X^2$
+
+$$\begin{align}
+\notag \sigma_X^2 &= E[(X-\mu_X)^2] \newline
+\notag &= E[X^2+\mu_X^2-2\mu_XX] \newline
+\notag &= E[X^2] + E[\mu_X^2] - E[2\mu_XX] \newline
+\notag &= m_X^2 + \mu_X^2 - 2\mu_X^2 \newline
+\notag &= m_X^2 - \mu_X^2
+\end{align}$$
 
 ### Somma di variabili aleatorie indipendenti
 
