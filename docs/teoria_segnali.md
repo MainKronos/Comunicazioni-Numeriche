@@ -811,10 +811,9 @@ al tendere di $n$ all'infinito, $Y_n$ converge alla variabile aleatoria Gaussian
 - Coefficiente di correlazione
 : $\rho_{XY} = \cfrac{c_{XY}}{\sigma_X\sigma_Y}$
 
-
 ## Processi stocastici
 
-### Definixioni
+### Definizioni
 
 - Distribuzione di probabilità del primo ordine
 : $F_X(x;t) = Pr(x(t)\le x)$
@@ -857,13 +856,13 @@ se:
     solamente dalla differenza tra la differenza tra due tempi qualsiasi
     al quale il processo é campionato
 
-#### Risposta del sistema SSL
+#### Risposta del sistema lineare stazionario
 
 - Valor medio
-: $\mu_Y= \mu_X H(0)$
+: $\mu_Y= \mu_X \otimes h(t) = \mu_X H(0)$
 
 - Autocorrelazione
-: $R_{Y} = R_{X} \otimes h(t_1)\otimes h(t_2)$
+: $R_{Y}(t_1,t_2) = R_{X}(t_1,t_2) \otimes h(t_1)\otimes h(t_2)$
 
 ### Processo Gaussiano
 
