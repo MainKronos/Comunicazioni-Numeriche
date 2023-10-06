@@ -692,15 +692,6 @@ $$x(t)=\sum\limits_{n}^{\infin}x[n]\cdot\text{sinc}\left(\cfrac{t-nT}{T}\right)$
 - Funzione densità di probabilità
 : $f_X(x) = \cfrac{dF_X(x)}{dx}$
 
-- Funzione distribuzione (variabili multiple)
-: $F_{X,Y}(x,y) = Pr(X\le x, Y\le y)$
-
-- Funzione densità di probabilità (variabili multiple)
-: $f_{X,Y}(x,y) = \cfrac{d^2F_{X,Y}(x,y)}{dxdy}$
-
-- Funzione probabilità condizionata
-: $f_Y(y|x) = \cfrac{f_{X,Y}(x,y)}{f_X(x)}$
-
 - Valore medio
 : $\mu_X = \mathbb{E}[X] = \int\limits_{-\infin}^{\infin}x\;f_X(x)dx$
 
@@ -712,12 +703,6 @@ $$x(t)=\sum\limits_{n}^{\infin}x[n]\cdot\text{sinc}\left(\cfrac{t-nT}{T}\right)$
 
 - Valore quadratico medio
 : $m_X^2 = E[X^2] = \int\limits_{-\infin}^{\infin}x^2\;f_X(x)dx$
-
-- Covarianza
-: $c_{XY} = \mathbb{E}[XY]-\mu_X\mu_Y$
-
-- Coefficiente di correlazione
-: $\rho_{XY} = \cfrac{c_{XY}}{\sigma_X\sigma_Y}$
 
 ### Proprietà
 
@@ -790,14 +775,75 @@ $$Y_n = \frac{1}{\sigma\sqrt{n}}\left(\sum\limits_{i=1}^n X_i-n\mu\right)$$
 
 al tendere di $n$ all'infinito, $Y_n$ converge alla variabile aleatoria Gaussiana standard.
 
+### Sistemi di due Variabili Aleatorie
+
+- Funzione di distribuzione congiunta
+: $F_{XY}(x,y) = Pr(X\le x, Y\le y)$
+
+- Desità di probabilità congiunta
+: $f_{XY}(x,y) = \cfrac{d}{dxdy}F_{XY}(x,y)$
+
+- Desità di probabilità condizionata
+: $f_{Y|X}(y|x) = \cfrac{f_{XY}(x,y)}{f_X(x)}$
+
+- Indipendenza di due V.A.
+: Se $f_{Y|X}(y|x) = f_Y(y)$ allora $X$ e $Y$ sono indipendenti
+
+- Desità di probabilità congiunta V.A. indipendenti
+: $f_{XY}(x,y) = f_X(x) f_Y(y)$ 
+
+### Indici statistici del secondo ordine
+
+- Correlazione tra due vartiabili aleatorie $X$, $Y$
+: $r_{XY} = E[XY] = \int\limits_{-\infty}^{\infty}\int\limits_{-\infty}^{\infty} xyf_{XY}(x,y)dxdy$
+
+- Covarianza tra due vartiabili aleatorie $X$, $Y$
+: $c_{XY} = E[(x-\mu_X)(y-\mu_Y)] = \int\limits_{-\infty}^{\infty}\int\limits_{-\infty}^{\infty} (x-\mu_X)(y-\mu_Y) f_{XY}(x,y)dxdy$
+
+- Relazione tra $r_{XY}$, $c_{XY}$ e $\mu_X\mu_Y$
+: $c_{XY} = E[(x-\mu_X)(y-\mu_Y)] = r_{XY} - \mu_X\mu_Y$
+
+- V.A Incorrelate
+: Due V.A sono incorrelate se la loro Covarianza è nulla ($c_{XY} = 0$)
+
+- Coefficiente di correlazione
+: $\rho_{XY} = \cfrac{c_{XY}}{\sigma_X\sigma_Y}$
+
+
 ## Processi stocastici
 
-### Definizioni
-- valore medio
-: $\mu_X = \mathbb{E}[X(t)] = \int\limits_{-\infty}^{\infty}xf_{X}(t)dt$
+### Definixioni
 
-- autocorrelazione
-: $R_{XY} = \mathbb{E}[XY] = \int\limits_{-\infty}^{\infty}\int\limits_{-\infty}^{\infty} xyf_{XY}(x,y)dxdy$
+- Distribuzione di probabilità del primo ordine
+: $F_X(x;t) = Pr(x(t)\le x)$
+
+- Distribuzione di probabilità del secondo ordine
+: $F_X(x_1,x_2;t_1,t_2) = Pr(x(t_1)\le x_1, X(t_2)\le x_2)$
+
+- Densità di probabilità del primo ordine
+: $f_X(x;t) = \cfrac{d}{dx}F_X(x;t)$
+
+- Densità di probabilità del secondo ordine
+: $f_X(x_1,x_2;t_1,t_2) = \cfrac{d^2}{dx_1dx_2}F_X(x_1,x_2;t_1,t_2)$
+
+### Indici statistici del primo ordine
+
+- Valore medio
+: $\mu_X = E[X(t)] = \int\limits_{-\infin}^{\infin}x\;f_X(x;t)dx$
+
+- Potenza media (statistica)
+: $P_X(t) = E[X^2(t)] = \int\limits_{-\infin}^{\infin}x^2\;f_X(x;t)dx$
+
+- Varianza
+: $\sigma_X^2(t) = \int\limits_{-\infin}^{\infin}(x-\mu_{X}(t))^2f_X(x;t)dx = E[(X(t) - \mu_X(t))^2]$
+
+### Indici statistici del secondo ordine
+
+- Autocorrelazione
+: $R_{X}(t_1,t_2) = E[X(t_1)X(t_2)]$
+
+- Autocovarianza
+: $C_X(t_1,t_2) = E[(X(t_1)-\mu_X(t_1))(X(t_2)-\mu_X(t_2))]$
 
 ### Sistemi Stazionari in senso lato (SSL)
 
