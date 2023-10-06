@@ -744,6 +744,8 @@ Una vartiabile eleatoria $X$ è Gaussiana se la sua funzione densità di probabi
 
 $$f_X(x) = \cfrac{1}{\sqrt{2\pi\sigma_X^2}}\cdot e^{-\cfrac{(x-\mu_X)^2}{2\sigma_X^2}}$$
 
+$$F_X(x) = \int\limits_{-\infty}^x f_X(\alpha)d\alpha$$
+
 $X \in \cal{N}(\mu_X,\sigma_X^2)$
 
 Una variabile aleatoria Gaussiana $N$ è standard se:
@@ -766,7 +768,7 @@ Data una variabile aleatoria $X \in \cal{N}(\mu_X,\sigma_X^2)$ definiamo $Y=aX+b
 
 Si introduce la funzione $Q$ perchè non è possibile calcolare in forma chiusa la funzione distribuzione di una Gaussiana
 
-$$Q = \frac{1}{\sqrt{2\pi}}\int\limits_x^{\infty}e^{-\normalsize{\frac{z^2}{2}}}dz$$
+$$Q(x) = \frac{1}{\sqrt{2\pi}}\int\limits_x^{\infty}e^{-\normalsize{\frac{z^2}{2}}}dz = 1-F_X(x) = Pr(X\ge x)$$
 
 ### Teorema del valore centrale
 
