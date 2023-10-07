@@ -106,15 +106,6 @@ $$x_{eff} = \sqrt{P_x}$$
 
 $$x_m = \lim\limits_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)dt$$
 
-- Densità spettrale
-
-: Dato un generico segnale $x_T(t)=x(t)\cdot \text{rect}(t/T)$ ad energia finita
-
-$$\begin{align}
-\notag \text{Densità spettrale di energia:}\quad& E_{X_T}(f)=|X_T(f)|^2 \newline
-\notag \text{Densità spettrale di potenza:}\quad& S_X(f)=\lim\limits_{T\rarr\infin}\cfrac{|X_T(f)|^2}{T}
-\end{align}$$
-
 ### Correlazione tra segnali periodici
 
 - Correlazione
@@ -856,13 +847,26 @@ se:
     solamente dalla differenza tra la differenza tra due tempi qualsiasi
     al quale il processo é campionato
 
-#### Risposta del sistema lineare stazionario
+#### Risposta del sistema lineare stazionario 
 
 - Valor medio
 : $\mu_Y= \mu_X \otimes h(t) = \mu_X H(0)$
 
 - Autocorrelazione
-: $R_{Y}(t_1,t_2) = R_{X}(t_1,t_2) \otimes h(t_1)\otimes h(t_2)$
+: $R_{Y}(\tau) = R_{X}(\tau) \otimes h(\tau)\otimes h(-\tau)$
+
+- Densità spettrale di potenza
+
+: $\quad S_X(f)=\lim\limits_{T\rarr\infin}E\left[\cfrac{|X_T(f)|^2}{T}\right] = \text{TCF}[R_X(\tau)]$
+: $\quad S_Y(f)=\text{TCF}[R_Y(\tau)] = S_X(f)|H(f)|^2$
+
+### Processo di rumore bianco
+
+Un processo di rumore bianco è un processo stazionario in senso lato con:
+
+- $\mu_X=0$
+- $R_X(\tau) = K\delta(\tau)$
+- $S_X(f) = K\quad \forall f$
 
 ### Processo Gaussiano
 
@@ -870,6 +874,8 @@ Un processo $Y(t)$ é detto processo Gaussiano se la variabile
 aleatoria $Y$ é una variabile aleatoria a distribuzione Gaussiana:
 $$f_{Y(y)} = \frac{1}{\sqrt{2\pi\sigma^2}}e^{\left(\displaystyle-\frac{(y-\mu)^2}{2\sigma^2}\right)}$$
 
+
+Un processo in uscita da un SLS quando in ingresso ho un processo gaussiano è anch'esso gaussiano.
 ---
 
 ## Sistemi di comunicazione numerici
