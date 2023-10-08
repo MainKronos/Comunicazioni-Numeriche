@@ -923,17 +923,14 @@ $$f_s = \frac{R_d}{Q} = \frac{R_d}{log_{2}(M)}$$
 
 la banda impiegata sará: $$B_T \simeq \frac{1}{T}$$
 
-### Modulazioni numeriche in banda base
-
-
-
-
 ### PAM
 
 Il *Phase Amplitude Modulation* (PAM) è un sistema di comunicazione in banda base.La cardinalità $M$ è una potenza di $2$.\
 Il segnale PAM è generato dalla serie di simboli $\\{a_i\\}$ modulati in ampiezza dal segnale $g_T(t)$:
 
 $$S_T(t) = \sum\limits_i a_ig_T(t-iT)$$
+
+$$a_i = 2i-1-M \quad \forall i = 1,\dotsb,M$$
 
 ![PAM](img/pam.png)
 
@@ -948,6 +945,9 @@ $$S_T(t) = \sum\limits_i a_ig_T(t-iT)$$
 - $g_R(t)$: filtro di ricezione
 
 - $\\^a_k$: stima del simbolo $a_k$
+
+- Valore medio
+: $E[s(t)] = 0$
 
 La componente $x(k)$ ricevuta dal ricevitore è:
 
