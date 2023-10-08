@@ -874,17 +874,43 @@ Un processo $Y(t)$ é detto processo Gaussiano se la variabile
 aleatoria $Y$ é una variabile aleatoria a distribuzione Gaussiana:
 $$f_{Y(y)} = \frac{1}{\sqrt{2\pi\sigma^2}}e^{\left(\displaystyle-\frac{(y-\mu)^2}{2\sigma^2}\right)}$$
 
-
 Un processo in uscita da un SLS quando in ingresso ho un processo gaussiano è anch'esso gaussiano.
+
 ---
 
 ## Sistemi di comunicazione numerici
 
 ![Alt text](img/sistema_comunicazione_numerico.png)
+![Alt text](img/ricevitore.png)
 
 - $\\{b_n\\}$: sequenza dei bit in uscita dalla sorgente
 - $\\{d_n\\}$: sequenza dei bit di codice
 - $\\{a_i\\}$: sequenza dei simboli appartenenti ad un alfabeto di $M$ diversi simboli
+
+- banda base
+: Il segnale $s(t)$ è in banda base
+- banda passante
+: Il segnale $s(t)$ è in banda passante
+
+- banda stretta
+: Un segnale è a banda stretta se $f_0>>B$, con $f_0$ la frequenza centrale del segnale trasmesso
+- banda larga
+: Un segnale è a banda larga se $f_0<=2B$, con $f_0$ la frequenza centrale del segnale trasmesso
+
+### Canale di comunicazione
+
+Il segnale ricevuto $r(t)$ sarà diverso da $s(t)$ a causa del canale di comunicazione, che introduce:
+
+- distorsione
+- rumore
+
+Un buon modello del canale è così descritto: $r(t) = s(t)\otimes c(t) + n(t)$
+
+Dove $c(t)$ è la risposta impulsiva del canale visto come un sistema lineare stazionario, e $n(t)$ un rumore Gaussiano bianco.
+
+$$n(t) \rarr \begin{cases}\mu_n &=0 \newline S_n(f) &= \frac{N_0}{2} \end{cases}$$
+
+---
 
 Il periodo $T$ tra due *simboli* adiacenti viene detto "Intervallo di Segnalazione". 
 Se $M=2^Q$ allora: 
@@ -896,6 +922,11 @@ la velocitá di trasmissione dei simboli $f_s = \frac{1}{T}$ é legata al rate $
 $$f_s = \frac{R_d}{Q} = \frac{R_d}{log_{2}(M)}$$ 
 
 la banda impiegata sará: $$B_T \simeq \frac{1}{T}$$
+
+### Modulazioni numeriche in banda base
+
+
+
 
 ### PAM
 
