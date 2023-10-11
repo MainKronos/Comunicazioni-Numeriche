@@ -761,6 +761,10 @@ Si introduce la funzione $Q$ perchè non è possibile calcolare in forma chiusa 
 
 $$Q(x) = \frac{1}{\sqrt{2\pi}}\int\limits_x^{\infty}e^{-\normalsize{\frac{z^2}{2}}}dz = 1-F_X(x) = Pr(X\ge x)$$
 
+???+ example
+	Sia $X$ una variabile aleatoria gaussina $\cal{N}(\mu,\sigma^2)$, allora:
+	$$Pr(X\le x) = F_X(x) = 1 - Q\left(\frac{x-\mu}{\sigma}\right)$$
+
 ### Teorema del valore centrale
 
 Siano $X_1,\ldots, X_n$ una sequenza di variabili aleatorie indipendenti e identicamente distribuite con valore medio $\mu$ e varrianza $\sigma$:
@@ -949,9 +953,39 @@ $$a_i = 2i-1-M \quad \forall i = 1,\dotsb,M$$
 - Valore medio
 : $E[s(t)] = 0$
 
+Segnale trasmesso:
+$$s_T(t) = \sum\limits_i a_ig_T(t-iT)$$
+
+Segnale utile ricevuto:
+$$s_R(t) = s_T(t)\otimes c(t) = \sum\limits_i a_ig_{TC}(t-iT)$$
+
+con: 
+$$g_{TC} = g_T(t)\otimes c(t)$$
+
+Segnale ricevuto:
+$$R(t)=S_r(T) + w(t)$$
+
+Segnale in uscita dal filtro di ricezione:
+$$x(t) = r(t)\otimes g_R(t) = \sum\limits_i a_ig(t-iT) + n(t)$$
+
+Dove $g(t)$ è la risposta impulsiva globale del sistema:
+$$g(t) = g_{TC}(t)\otimes g_R(t) = g_T(t)\otimes c(t) \otimes g_R(t)$$
+
+con:
+
+$$n(t) = w(t)\otimes g_R(t)$$
+
+processo Gaussiano a media nulla e densità spettrale di potenza:
+
+$$S_n(f) = \frac{N_0}{2}|G_R(f)|^2$$
+
 La componente $x(k)$ ricevuta dal ricevitore è:
 
 $$x(k) = \sum\limits_i a_ig[(k-i)T]+n_k$$
+
+dove $n_k$ è una variabile aleatoria Gaussiana a media nulla e varianza:
+
+$$\sigma^2 = \frac{N_0}{2}\int\limits_{-\infty}^\infty|G_R(f)|^2df$$
 
 indicando con $m=k-i$ e isolando il termine relativo a $m=0$
 
@@ -960,26 +994,6 @@ $$x(k)=a_kg(0)+\sum\limits_{m\ne0} a_{k-m}g(mt)+n_k$$
 il secondo termine è l'interferenza intersimbolica (ISI)
 
 $$\text{ISI}=\sum\limits_{m\ne0}a_{k-m}\;g(mT)$$
-
-#### Grandezze energetiche
-
-##### Caso generale
-
-- Densità spettrale di potenza
-: $S_s(f) = \frac{1}{T}S_a(f)|G_T(f)|^2$
-: dove
-: $S_a(f)=\sum\limits_m R_a(m)e^{-j2\pi mft}$
-
-- Potenza del segnale
-: $P_s = \frac{1}{T}\int\limits_{-\infty}^{\infty}S_a(f)|G_T(f)|^2df$
-
-##### Simboli Indipendenti e Identicamente Distribuiti (IID)
-
-- Densità spettrale di potenza
-: $S_s(f) = \frac{M^2-1}{3T}|G_T(f)|^2$
-
-- Potenza del segnale
-: $P_s = \frac{M^2-1}{3T}\int\limits_{-\infty}^{\infty}|G_T(f)|^2df$
 
 #### Annullamento dell'ISI
 
@@ -1007,21 +1021,93 @@ $$\sum\limits_{l=-\infin}^{\infin}G\left(f-\frac{l}{T}\right)=T$$
 
 #### Filtro adattato
 
+![filtro_adattato](img/filtro_adattato.png)
+
+Sia il campione in uscita dal filtro:
+
+$$x(t_0) = s(t_0)+n(t_0)$$
+
+dove:
+
+$$s(t_0) = \int\limits_{-\infty}^\infty h(\tau)p(t_0-\tau)d\tau$$
+$$n(t_0) = \int\limits_{-\infty}^\infty h(\tau)w(t_0-\tau)d\tau$$
+
+
 Il rapporto segnale rumore:
 
 $$SNR = \cfrac{\left[\int\limits_{-\infin}^\infin h(t)p(t_0-t)dt\right]^2}{\frac{N_0}{2}\int\limits_{-\infin}^\infin h^2(t)dt}$$
 
-Il progetto dei filtri $g_T(t)$ e $g_R(t)$ passa attraverso le seguenti condizioni:
+devo ora trovare $h(t)$ che massimizzi SNR, faccio la disuguaglianza di schwartz scomponendo l’integrale in 2 e mi accorgo che l’uguaglianza si ha per:
 
-a) Annullamento dell'ISI
-: $G(f) = G_T(f)G_R(f)=G_{RCR}(f)$
+$$h(t) = kp(t_0-t)$$
 
-b) Massimizzazione del rapporto segnale rumore sul campione in uscita dal filtro di ricezione
-: $g_R(t)=g_T(-t) \to G_R(f)=G^{*}_T(f)$
+con $k$ reale non nullo, sostituisco la disuguaglianza nell’espressione di prima, si ottiene che il valore massimo si ha nel caso seguente: 
 
-il filtro quindi deve essere:
+$$SNR|_{max} = \frac{2}{N_0} \int\limits_{-\infty}^{\infty} p^2(t_0-t)dt$$
 
-$$G_T(f) = G_R(f)=\sqrt{G_{RCR}(f)}$$
+Il filtro $h(t)$ la cui risposta impulsiva è
+
+$$h(t) = p(t_0-t)$$
+
+si dice "ADATTATO" all'impulso $p(t)$, e massimaizza il rapporto segnale-rumore alla sua uscita all'istante $t_0$ quando il rumore di ingresso è bianco.
+
+In frequenza:
+
+$$H(f) = P^{\*}(f)e^{-j2\pi ft_0}$$
+ 
+### Circuito decisore
+
+![decisore](img/decisore.png)
+
+Riceve il campione x(k) e lo usa per prendere una decisione sul simbolo trasmesso, usando il criterio MAP (maximum a posteriori probability) per cui scelgo il simbolo dell’alfabeto che ha la massima probabilità a posteriori di essere stato trasmesso.
+
+Ipotizzando assenza di ISI e canale ideale $c(t) = \delta(t)$, possiamo scrivere:
+
+$$x(k) = a_k+n_k$$
+
+dove $n_k$ è una variabile aleatoria gaussiana a media nulla e varianza $\sigma^2$, si ha allora:
+
+$$f_X(x(k)|a_k=a^{(m)}) = \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\cfrac{\left[x(k)-a^{(m)}\right]^2}{2\sigma^2}}$$
+
+Sapendo che il criterio MAP sancisce che il criterio trasmesso è $\hat{a}_k = a^{(i)}$ se:
+
+$$Pr(a_k=a^{(i)}|x(k)) > Pr(a_k=a^{(l)}|x(k)) \quad \forall\;i,l \in \\{1,2,...,M\\}\;|\; l\ne i$$
+
+dove:
+
+$$Pr(a_k=a^{(m)}|x(k)) = \frac{f_X(x(k)|a_k=a^{(m)})\;Pr(a_k=a^{(m)})}{f_X(x(k))}$$
+
+visto che il denominatore non dipende dal simbolo può essere ignorato.
+Ipotizzando che i simboli siano equiprobabili:
+
+$$\begin{align}
+\notag \hat{a}_k &= \max_{\substack{a^{(m)}}} f_X(x(k)|a_k=a^{(m)})\newline
+\notag &= \max_{\substack{a^{(m)}}} \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\cfrac{\left[x(k)-a^{(m)}\right]^2}{2\sigma^2}} \newline
+\notag &= \min_{\substack{a^{(m)}}} \cfrac{\left[x(k)-a^{(m)}\right]^2}{2\sigma^2} \newline
+\notag &= \min_{\substack{a^{(m)}}} |x(k)-a^{(m)}|
+\end{align}$$
+
+in questo caso le soglie che delimitano le varie zone di decisione sono poste esattamente a metà tra due simboli adiacenti nell’alfabeto, il simbolo deciso sarà pertanto quello più vicino in senso euclideo al campione $x(k)$ ricevuto
+
+#### Grandezze energetiche
+
+##### Caso generale
+
+- Densità spettrale di potenza
+: $S_s(f) = \frac{1}{T}S_a(f)|G_T(f)|^2$
+: dove
+: $S_a(f)=\sum\limits_m R_a(m)e^{-j2\pi mft}$
+
+- Potenza del segnale
+: $P_s = \frac{1}{T}\int\limits_{-\infty}^{\infty}S_a(f)|G_T(f)|^2df$
+
+##### Simboli Indipendenti e Identicamente Distribuiti (IID)
+
+- Densità spettrale di potenza
+: $S_s(f) = \frac{M^2-1}{3T}|G_T(f)|^2$
+
+- Potenza del segnale
+: $P_s = \frac{M^2-1}{3T}\int\limits_{-\infty}^{\infty}|G_T(f)|^2df$
 
 #### Criterio MAP
 
