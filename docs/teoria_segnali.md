@@ -1043,7 +1043,7 @@ $$h(t) = kp(t_0-t)$$
 
 con $k$ reale non nullo, sostituisco la disuguaglianza nell’espressione di prima, si ottiene che il valore massimo si ha nel caso seguente: 
 
-$$SNR|_{max} = \frac{2}{N_0} \int\limits_{-\infty}^{\infty} p^2(t_0-t)dt$$
+$$SNR| \max = \frac{2}{N_0} \int\limits_{-\infty}^{\infty} p^2(t_0-t)dt$$
 
 Il filtro $h(t)$ la cui risposta impulsiva è
 
@@ -1055,7 +1055,7 @@ In frequenza:
 
 $$H(f) = P^{\*}(f)e^{-j2\pi ft_0}$$
  
-### Circuito decisore
+#### Circuito decisore
 
 ![decisore](img/decisore.png)
 
@@ -1081,13 +1081,22 @@ visto che il denominatore non dipende dal simbolo può essere ignorato.
 Ipotizzando che i simboli siano equiprobabili:
 
 $$\begin{align}
-\notag \hat{a}_k &= \max_{\substack{a^{(m)}}} f_X(x(k)|a_k=a^{(m)})\newline
+\notag \^{a_k} &= \max_{\substack{a^{(m)}}} f_X(x(k)|a_k=a^{(m)})\newline
 \notag &= \max_{\substack{a^{(m)}}} \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\cfrac{\left[x(k)-a^{(m)}\right]^2}{2\sigma^2}} \newline
 \notag &= \min_{\substack{a^{(m)}}} \cfrac{\left[x(k)-a^{(m)}\right]^2}{2\sigma^2} \newline
 \notag &= \min_{\substack{a^{(m)}}} |x(k)-a^{(m)}|
 \end{align}$$
 
 in questo caso le soglie che delimitano le varie zone di decisione sono poste esattamente a metà tra due simboli adiacenti nell’alfabeto, il simbolo deciso sarà pertanto quello più vicino in senso euclideo al campione $x(k)$ ricevuto
+
+#### Calcolo della SER
+
+Vogliamo calcolare la probabilità media di errore sul simbolo ammettendo che i simboli siano equiprobabili e non ci sia ISI in ingresso al ricevitore.
+
+Sia il filtro di ricezione che quello di trasmissione sono a radice di coseno rialzato:
+
+$$SER = \cfrac{2(M-1)}{M}\cdot Q\left(\sqrt{\cfrac{6(E_d/N_0)\log_2M}{M^2-1}}\right)$$
+
 
 #### Grandezze energetiche
 
@@ -1108,20 +1117,6 @@ in questo caso le soglie che delimitano le varie zone di decisione sono poste es
 
 - Potenza del segnale
 : $P_s = \frac{M^2-1}{3T}\int\limits_{-\infty}^{\infty}|G_T(f)|^2df$
-
-#### Criterio MAP
-
-Voglio massimizzare la prbabilitá di corretta ricezione
-
-$$P_r(a_k = a^{(m)}|x(k)) = \frac{f_X(x(k)|a_k = a^{(m)})P_r(a_k = a^{(m)})}{f_X(x(k))}$$
-
-se i simboli non sono equiprobabili
-
-$$\Gamma_{(a^{(m)},x(k))} = \left[x(k)-a^{(m)}\right]^2-2\sigma^2\ln(P_m)$$
-
-In caso di simboli equiprobabili diventa il criterio a massima verosomiglianza
-
-$$\left[x(k)-a^{(i)}\right]^2 < \left[x(k)-a^{(l)}\right]^2$$
 
 #### Valori con filtro a radice di coseno rialzato
 
