@@ -578,7 +578,7 @@ $$\begin{align}
 
 $\to X(f)\otimes T\text{sinc}(Tf)$ ha banda infinita
 
-## Relazione tra TCF e TSF
+## Relazione tra TCF e TDF
 
 Se:
 $$\begin{align}
@@ -679,6 +679,9 @@ $$x(t)=\sum\limits_{n}^{\infin}x[n]\cdot\text{sinc}\left(\cfrac{t-nT}{T}\right)$
 
 - Funzione distribuzione
 : $F_X(x) = Pr(X\le x)$
+
+- Probabilità di massa (variabili aleatorie discrete):
+: $p_X(x) = P(X=x)$
 
 - Funzione densità di probabilità
 : $f_X(x) = \cfrac{dF_X(x)}{dx}$
@@ -914,7 +917,7 @@ Dove $c(t)$ è la risposta impulsiva del canale visto come un sistema lineare st
 
 $$n(t) \rarr \begin{cases}\mu_n &=0 \newline S_n(f) &= \frac{N_0}{2} \end{cases}$$
 
----
+### Trasmettitore
 
 Il periodo $T$ tra due *simboli* adiacenti viene detto "Intervallo di Segnalazione". 
 Se $M=2^Q$ allora: 
@@ -989,7 +992,7 @@ $$\sigma^2 = \frac{N_0}{2}\int\limits_{-\infty}^\infty|G_R(f)|^2df$$
 
 indicando con $m=k-i$ e isolando il termine relativo a $m=0$
 
-$$x(k)=a_kg(0)+\sum\limits_{m\ne0} a_{k-m}g(mt)+n_k$$
+$$x(k)=a_kg(0)+\sum\limits_{m\ne0} a_{k-m}g(mT)+n_k$$
 
 il secondo termine è l'interferenza intersimbolica (ISI)
 
@@ -1130,7 +1133,36 @@ $$SER = \cfrac{2(M-1)}{M}\cdot Q\left(\sqrt{\cfrac{6(E_d/N_0)\log_2M}{M^2-1}}\ri
 : $\eta_{sp} = \cfrac{2\log_2M}{1+\alpha}$
 
 - Bit Error Rate (BER) con codifica GRAY
+: $\cfrac{SER}{\log_2M}\le BER \le SER$
 : $BER = \cfrac{2(M-1)}{M\log_2M}\cdot Q\left(\sqrt{\cfrac{6(E_d/N_0)\log_2M}{M^2-1}}\right)$
+
+## Sitemi in banda passante
+
+Sono sitemi di comunicazione numerici in cui il segnale trasmesso $s_T(t)$ ha densità spettrale di potenza di tipo passa-banda, centrata su una frequenza $f_0$ detta "frequenza portante".
+
+L'inviluppo complesso del segnale è 
+
+$$\tilde{S}(t)=I(t)+jQ(t)$$
+
+e vale la relazione 
+
+$$S_T(t) = \mathbb{Re}\left\\{\tilde{S}_T(t)e^{j\omega_0 t}\right\\}$$
+
+ovvero
+
+$$S_T(t) = I(t)\cos(\omega_0 t) - Q(t)\sin(\omega_0 t)$$
+
+Dove $I(t)$ e $Q(t)$ sono le componenti in fase e quadratura del segnale trasmesso $S_T(t)$
+
+$$I(t) = \sum\limits_i a_i g_T(t-iT)$$
+$$Q(t) = \sum\limits_i b_i g_T(t-iT)$$
+
+$g_T$ è l’impulso di trasmissione e $T$ è l’intervallo di segnalazione, $a_i$ e $b_i$ sono i simboli di modulazione ottenuti dal mappaggio dei bit di codice $d_m$
+
+La mappa ha cardinalità $M$ ed è bidimensionale, ad ogni stringa di $\log_2(M)$ bit di codice fa corrispondere una coppia $(ai,bi)$
+
+L’alfabeto è detto costellazione
+
 
 ### QAM
 
