@@ -1175,7 +1175,15 @@ Il *Quadrature Amplitude Modulation* (QAM) è un sistema di comunicazione in ban
 #### Valori
 
 - Densità spettrale di potenza
-: $S_s(f) = \frac{2(M-1)}{3T}|G_T(f)|^2$
+: $S_s(f) = \frac{1}{4}(S_{\tilde{s}}(f-f_0) + S_{\tilde{s}}(-f-f_0))$
+
+- Densità spettrale di potenza invuluppo complesso
+: $S_{\tilde{s}}(f) = \frac{1}{T}S_c(f)|G_T(f)|^2$
+: dove
+: $S_c(f)=\sum\limits_m R_c(m)e^{-j2\pi mft}$
+
+- Densità spettrale di potenza invuluppo complesso caso iid
+: $S_{\tilde{s}}(f) = \frac{2(M-1)}{3T}|G_T(f)|^2$
 
 - Efficienza spettrale:
 : $\eta_{sp} = \cfrac{\log_2M}{1+\alpha}$
