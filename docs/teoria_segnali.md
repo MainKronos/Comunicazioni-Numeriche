@@ -191,7 +191,7 @@ $$\large\begin{align}
 |$\delta(t)$|$1$|
 |$\text{rect}\left(\frac{t}{T}\right)$|$T\;\text{sinc}(fT)$|
 |$\cos(2\pi f_0t)$|$\frac{\delta(f-f_0)}{2}+\frac{\delta(f+f_0)}{2}$|
-|$\sin(2\pi f_0t)$|$\frac{\delta(f-f_0)}{2j}+\frac{\delta(f+f_0)}{2j}$|
+|$\sin(2\pi f_0t)$|$\frac{\delta(f-f_0)}{2j}-\frac{\delta(f+f_0)}{2j}$|
 
 ??? abstract "$x(t) = A\;\text{rect}(t/T)$"
     $$\begin{align}
